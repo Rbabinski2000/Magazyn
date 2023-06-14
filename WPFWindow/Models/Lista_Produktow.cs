@@ -15,7 +15,10 @@ namespace WPFWindow.Models
         {
             Lista = new List<Produkt>();
         }
-
+        public IEnumerable<Produkt> GetList()
+        {
+            return Lista;   
+        }
         public void AutoAdd(Produkt produkt)
         {
             Lista.Add(produkt);

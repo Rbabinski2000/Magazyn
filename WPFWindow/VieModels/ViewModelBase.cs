@@ -11,6 +11,8 @@ namespace WPFWindow.VieModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        //prote
+        protected void OnPropertyChanged(string propertyName) { 
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

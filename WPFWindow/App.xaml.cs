@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WPFWindow.Models;
+using WPFWindow.Services;
+using WPFWindow.Stores;
+using WPFWindow.VieModels;
 
 namespace WPFWindow
 {
@@ -15,16 +18,30 @@ namespace WPFWindow
     /// </summary>
     public partial class App : Application
     {
+        private readonly NavigationStore store;
+
+        public App()
+        {
+            store=new NavigationStore();
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
-            Magazyn.ListaProd.AddProdukt("ogórek", 4.8, 200);
-            Magazyn.ListaProd.AddProdukt("marchewka", 2, 500);
-            Magazyn.ListaProd.AddProdukt("sałata", 0.5, 100);
-            Magazyn.ListaProd.AddProdukt("cytryna", 3.1, 155);
-            var user = new Uzytkownik("Klient");
-            Console.WriteLine(Magazyn.ListaProd);
+            store.CurrentViewModel=CreateLista_ProdViewModel();
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel(store)
+            };
+            MainWindow.Show();
 
             base.OnStartup(e);
+        }
+        private MakeProduktViewModel CreateMakeProduktViewModel()
+        {
+            return new MakeProduktViewModel(new NavigationService(store, CreateLista_ProdViewModel));
+        }
+        private Lista_ProdViewModel CreateLista_ProdViewModel()
+        {
+            return new Lista_ProdViewModel(new NavigationService(store, CreateMakeProduktViewModel));
         }
     }
 }

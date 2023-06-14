@@ -12,8 +12,21 @@
                    FontSize="24"
                    Grid.Row="0"></TextBlock>
 
-        <Button Content="Zaloguj" HorizontalAlignment="Left" Margin="324,306,0,0" Grid.Row="2" VerticalAlignment="Top" Width="155" Height="43" Click="Button_Click"/>
-        <TextBox x:Name="TextBox_Login" HorizontalAlignment="Center" Margin="0,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBox_Login" 
+                 HorizontalAlignment="Center" 
+                 Margin="0,168,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="120"
+                 Text="{Binding Username}"/>
+        
+        <Button Content="Zaloguj" 
+                HorizontalAlignment="Left" 
+                Margin="324,306,0,0" 
+                Grid.Row="2" 
+                VerticalAlignment="Top" 
+                Width="155" Height="43" 
+                Command="{Binding}"/>
+        
+        
 
     </Grid>
 </UserControl>

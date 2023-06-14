@@ -10,7 +10,8 @@ namespace WPFWindow.Models
 {
     public class Lista_Produktow
     {
-        private List<Produkt> Lista;
+        public List<Produkt> Lista;
+        
         public Lista_Produktow()
         {
             Lista = new List<Produkt>();

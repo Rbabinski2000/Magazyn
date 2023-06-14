@@ -19,14 +19,15 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Lista Produktów"/>
-            <Button Grid.Column="1" Content="Dodaj Produkt" Margin="10 0 0 0"/>
+            <Button Grid.Column="1" 
+                    Content="Dodaj Produkt" 
+                    Margin="10 0 0 0"
+                    Command="{Binding AddProduktCommand}"/>
 
         </Grid>
 
-        <ListView Grid.Row="1" Margin="0 25 0 0">
-            <ListViewItem/>
-            <ListViewItem/>
-            <ListViewItem/>
+        <ListView Grid.Row="1" Margin="0 25 0 0" ItemsSource="{Binding Produkty}">
+            
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -37,7 +38,7 @@
                     <GridViewColumn Header="Nazwa" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Padding="0 0 20 0" Text="ogorek "/>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Name}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -45,7 +46,7 @@
                     <GridViewColumn Header="Cena">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Padding="0 0 20 0" Text="4.8"/>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Price}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -53,7 +54,7 @@
                     <GridViewColumn Header="Ilość">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Padding="0 0 20 0" Text="21"/>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Amount}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

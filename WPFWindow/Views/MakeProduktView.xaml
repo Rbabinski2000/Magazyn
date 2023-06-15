@@ -13,6 +13,9 @@
         <TextBox HorizontalAlignment="Left" Margin="393,183,0,0" TextWrapping="Wrap" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" Margin="576,183,0,0" TextWrapping="Wrap" Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,29,0,0" TextWrapping="Wrap" Text="Dodaj Produkt" VerticalAlignment="Top" Height="38" Width="246" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" Margin="400,135,0,0" TextWrapping="Wrap" Text="Cena" VerticalAlignment="Top" Height="20" Width="113"/>
+        <TextBlock HorizontalAlignment="Left" Margin="576,135,0,0" TextWrapping="Wrap" Text="Ilość" VerticalAlignment="Top" Height="20" Width="113"/>
+        <TextBlock HorizontalAlignment="Left" Margin="222,135,0,0" TextWrapping="Wrap" Text="Nazwa Produktu" VerticalAlignment="Top" Height="20" Width="113"/>
 
     </Grid>
 </UserControl>

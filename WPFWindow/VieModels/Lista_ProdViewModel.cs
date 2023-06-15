@@ -18,9 +18,9 @@ namespace WPFWindow.VieModels
         public IEnumerable<ProduktViewModel> Produkty => produkty;
         public ICommand AddProduktCommand { get; }
         public ICommand LoadProduktCommand { get; }
-        private Magazyn magazyn;
+        private MagazynStore magazyn;
 
-        public Lista_ProdViewModel(Magazyn mag, NavigationService makeLista_ProdNavigationService)
+        public Lista_ProdViewModel(MagazynStore mag, NavigationService makeLista_ProdNavigationService)
         {
             produkty = new ObservableCollection<ProduktViewModel>();
             magazyn = mag;
@@ -29,7 +29,7 @@ namespace WPFWindow.VieModels
 
 
         }
-        public static Lista_ProdViewModel LoadViewModel(Magazyn mag, NavigationService makeLista_ProdNavigationService)
+        public static Lista_ProdViewModel LoadViewModel(MagazynStore mag, NavigationService makeLista_ProdNavigationService)
         {
             Lista_ProdViewModel viewModel = new Lista_ProdViewModel(mag,makeLista_ProdNavigationService);
             

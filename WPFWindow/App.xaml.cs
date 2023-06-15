@@ -23,6 +23,7 @@ namespace WPFWindow
     public partial class App : Application
     {
         private Magazyn magazyn;
+        private MagazynStore magStore;
         private readonly NavigationStore store;
         private const string CONNECTION_STRING = "Data Source=magazyn.db";
         MagazynDBcontextFactory magazynDBcontextFactory;
@@ -33,6 +34,7 @@ namespace WPFWindow
             IProduktCreator produktCreator = new DatabaseProduktCreator(magazynDBcontextFactory);
 
             magazyn= new Magazyn("Stokrotka",new Lista_Produktow(produktProvider, produktCreator));
+            magStore = new MagazynStore(magazyn);
             store=new NavigationStore();
 
         }
@@ -61,7 +63,7 @@ namespace WPFWindow
         }
         private Lista_ProdViewModel CreateLista_ProdViewModel()
         {
-            return Lista_ProdViewModel.LoadViewModel(magazyn,new NavigationService(store, CreateMakeProduktViewModel));
+            return Lista_ProdViewModel.LoadViewModel(magStore,new NavigationService(store, CreateMakeProduktViewModel));
         }
     }
 }

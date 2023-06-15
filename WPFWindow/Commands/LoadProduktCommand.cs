@@ -5,18 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using WPFWindow.Models;
+using WPFWindow.Stores;
 using WPFWindow.VieModels;
 
 namespace WPFWindow.Commands
 {
     public class LoadProduktCommand : AsyncCommandBase
     {
-        private Magazyn magazyn;
+        private MagazynStore magazynStore;
         private Lista_ProdViewModel viewModel;
 
-        public LoadProduktCommand(Magazyn magazyn, Lista_ProdViewModel viewModel)
+        public LoadProduktCommand(MagazynStore magazynstore, Lista_ProdViewModel viewModel)
         {
-            this.magazyn = magazyn;
+            this.magazynStore = magazynstore;
             this.viewModel = viewModel;
         }
 
@@ -25,8 +26,8 @@ namespace WPFWindow.Commands
             try
             {
 
-                IEnumerable<Produkt> Produkty = await magazyn.GetAllProdukt();
-                viewModel.UpdateList(Produkty);
+                await magazynStore.Load();
+                viewModel.UpdateList(magazynStore.ListaProd);
             }
             catch (Exception)
             {

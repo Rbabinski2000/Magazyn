@@ -11,14 +11,16 @@ using WPFWindow.VieModels;
 
 namespace WPFWindow.Commands
 {
-    public class AddProduktCommand : CommandBase
+    public class AddProduktCommand : AsyncCommandBase
     {
         private readonly MakeProduktViewModel Produkt;
         private readonly NavigationService ProduktViewNavigationService;
-        public AddProduktCommand(MakeProduktViewModel produkt,NavigationService produktViewNavigationService) { 
+        private Magazyn magazyn;
+        public AddProduktCommand(Magazyn mag,MakeProduktViewModel produkt,NavigationService produktViewNavigationService) { 
             Produkt = produkt;
             ProduktViewNavigationService = produktViewNavigationService;
             Produkt.PropertyChanged += OnViewModelPropertyChanged;
+            magazyn = mag;
         }
 
         
@@ -27,19 +29,21 @@ namespace WPFWindow.Commands
         {
             return !string.IsNullOrEmpty(Produkt.Name) && base.CanExecute(parameter);
         }
-        public override void Execute(object? parameter)
+        public override async Task ExecuteAsync(object? parameter)
         {
+
             
-                foreach(var x in Magazyn.ListaProd.Lista)
-                {
-                    if(x.Name == Produkt.Name)
-                    {
-                    MessageBox.Show("Już jest taki produkt", "Succes",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-            Magazyn.ListaProd.AddProdukt(Produkt.Name, Produkt.Price,Produkt.Amount);
+            Produkt pro = new Produkt(Produkt.Name, Produkt.Price, Produkt.Amount);
+            try
+            {
+
+            await magazyn.AddProdukt(pro);
+                MessageBox.Show("Poprawnie dodano produkt.", "Success",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            finally { 
             ProduktViewNavigationService.Navigate();
+            }
         }
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {

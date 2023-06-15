@@ -3,16 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static WPFWindow.Models.Magazyn;
+
 namespace WPFWindow.Models
 {
-    static class Magazyn
+    public class Magazyn
     {
-        public static Lista_Produktow ListaProd = new Lista_Produktow();
+        public  Lista_Produktow ListaProd;
 
-        public static string Name = "Stokrotka";
+        public  string Name;
         
-        
+        public Magazyn(string name, Lista_Produktow Lista)
+        {
+            Name = name;
+            ListaProd = Lista;
+        }
+
+        public async Task<IEnumerable<Produkt>> GetAllProdukt()
+        {
+            return await ListaProd.GetAllProdukt();
+        }
+        public async Task AddProdukt(Produkt pro)
+        {
+           await ListaProd.AddProdukt(pro);
+        }
         
     }
 }

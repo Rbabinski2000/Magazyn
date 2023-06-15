@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFWindow.Commands;
+using WPFWindow.Models;
 using WPFWindow.Services;
 using WPFWindow.Stores;
 
@@ -53,9 +54,9 @@ namespace WPFWindow.VieModels
         public ICommand AddProduktCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public MakeProduktViewModel( NavigationService produktViewNavigationService)
+        public MakeProduktViewModel(Magazyn mag, NavigationService produktViewNavigationService)
         {
-            AddProduktCommand = new AddProduktCommand(this,produktViewNavigationService);
+            AddProduktCommand = new AddProduktCommand(mag,this,produktViewNavigationService);
             CancelCommand = new NavigateCommand(produktViewNavigationService);
         }
 

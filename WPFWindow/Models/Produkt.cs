@@ -16,7 +16,6 @@ namespace WPFWindow.Models
             Name = name;
             Price = price;
             Amount = amount;
-            Magazyn.ListaProd.AutoAdd(this);
 
         }
         

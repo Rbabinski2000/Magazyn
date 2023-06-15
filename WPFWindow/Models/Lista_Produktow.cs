@@ -4,33 +4,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WPFWindow.Services.ProduktCreators;
+using WPFWindow.Services.ProduktProvider;
 
 namespace WPFWindow.Models
 {
     public class Lista_Produktow
     {
-        public List<Produkt> Lista;
+        //public List<Produkt> Lista;
+        private readonly IProduktProvider produktProvider;
+        private readonly IProduktCreator produktCreator;
+
+
         
-        public Lista_Produktow()
+        public Lista_Produktow(IProduktProvider listaProvider, IProduktCreator listaCreator)
         {
-            Lista = new List<Produkt>();
+            produktProvider = listaProvider;
+            produktCreator = listaCreator;
         }
-        public IEnumerable<Produkt> GetList()
+
+        public async Task<IEnumerable<Produkt>> GetAllProdukt()
         {
-            return Lista;   
+            return await produktProvider.GetAllProdukt();  
         }
-        public void AutoAdd(Produkt produkt)
+        
+        public async Task AddProdukt(Produkt pro)
         {
-            Lista.Add(produkt);
+
+           await produktCreator.CreateProdukt(pro);
         }
-        public void AddProdukt(string name,double price,int amount)
-        {
-            new Produkt(name,price,amount);
-        }
-        public void RemoveProdukt(Produkt produkt)
-        {
-            Lista.Remove(produkt);
-        }
+        
     }
 }

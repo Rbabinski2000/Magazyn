@@ -17,20 +17,30 @@ namespace WPFWindow.VieModels
         private readonly ObservableCollection<ProduktViewModel> produkty;
         public IEnumerable<ProduktViewModel> Produkty => produkty;
         public ICommand AddProduktCommand { get; }
+        public ICommand LoadProduktCommand { get; }
+        private Magazyn magazyn;
 
-        public Lista_ProdViewModel(NavigationService makeLista_ProdNavigationService)
+        public Lista_ProdViewModel(Magazyn mag, NavigationService makeLista_ProdNavigationService)
         {
             produkty = new ObservableCollection<ProduktViewModel>();
-
+            magazyn = mag;
             AddProduktCommand = new NavigateCommand(makeLista_ProdNavigationService);
+            LoadProduktCommand = new LoadProduktCommand(magazyn,this);
 
-            
-            UpdateList();
+
         }
-        public void UpdateList()
+        public static Lista_ProdViewModel LoadViewModel(Magazyn mag, NavigationService makeLista_ProdNavigationService)
+        {
+            Lista_ProdViewModel viewModel = new Lista_ProdViewModel(mag,makeLista_ProdNavigationService);
+            
+            viewModel.LoadProduktCommand.Execute(null);
+            return viewModel;
+        
+        }
+        public void UpdateList(IEnumerable<Produkt> pro)
         {
             produkty.Clear();
-            foreach(Produkt x in Magazyn.ListaProd.Lista)
+            foreach(Produkt x in pro)
             {
                 ProduktViewModel temp = new ProduktViewModel(x);
                 produkty.Add(temp);
